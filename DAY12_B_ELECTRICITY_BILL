@@ -1,0 +1,54 @@
+#include <stdio.h>
+
+int main() {
+    int units;
+    if (scanf("%d", &units) != 1) {
+        return 1;
+    }
+
+    long bill = 0;
+
+    if (units > 0) {
+        int u = units;
+
+        // First 100 units at ₹5/unit
+        if (u <= 100) {
+            bill += u * 5;
+            u = 0;
+        } else {
+            bill += 100 * 5;
+            u -= 100;
+        }
+
+        // Next 100 units (101–200) at ₹7/unit
+        if (u > 0) {
+            if (u <= 100) {
+                bill += u * 7;
+                u = 0;
+            } else {
+                bill += 100 * 7;
+                u -= 100;
+            }
+        }
+
+        // Next 100 units (201–300) at ₹10/unit
+        if (u > 0) {
+            if (u <= 100) {
+                bill += u * 10;
+                u = 0;
+            } else {
+                bill += 100 * 10;
+                u -= 100;
+            }
+        }
+
+        // Above 300 units at ₹12/unit
+        if (u > 0) {
+            bill += u * 12;
+        }
+    }
+
+    printf("Bill: ₹%ld\n", bill);
+
+    return 0;
+}
